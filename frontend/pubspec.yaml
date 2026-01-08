@@ -37,6 +37,11 @@ dependencies:
   flutter_dotenv:
   get:
   http:
+  provider:
+  shared_preferences:
+  persistent_bottom_nav_bar_v2: ^6.2.0
+  badges:
+  buttons_tabbar:
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +69,7 @@ flutter:
   assets:
     - .env
 
-    - assets/
+    - assets/images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

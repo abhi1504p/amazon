@@ -13,7 +13,9 @@ const PORT = process.env.PORT
 const authRouter = require("./routes/auth");
 
 // Middleware
+app.use(express.json());
 app.use(authRouter);
+
 
 // Connections
 mongoose.connect(process.env.DB_URL).then(() => {
@@ -24,6 +26,6 @@ mongoose.connect(process.env.DB_URL).then(() => {
 
 
 // Create Api Server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server started at port http://localhost:${PORT}`)
 })

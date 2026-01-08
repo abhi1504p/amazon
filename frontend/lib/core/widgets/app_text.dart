@@ -47,8 +47,8 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.maxLines,
     this.overflow,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Use for titles and important headings
   factory AppText.heading(

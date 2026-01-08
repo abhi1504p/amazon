@@ -27,6 +27,8 @@ class AppButton extends StatelessWidget {
   /// Background color for filled button or border/text color for outlined and text buttons.
   final Color? color;
 
+  final Color? background;
+
   /// Text color for the filled button or for text/outlined button text.
   final Color? textColor;
 
@@ -53,6 +55,7 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.type,
     this.text,
+    this.background,
     this.child,
     this.onPressed,
     this.color,
@@ -64,9 +67,9 @@ class AppButton extends StatelessWidget {
     this.isHome = false,
     this.icons,
   }) : assert(
-  (text != null && child == null) || (text == null && child != null),
-  'You must provide either `text` or `child`, not both or neither.',
-  );
+         (text != null && child == null) || (text == null && child != null),
+         'You must provide either `text` or `child`, not both or neither.',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -85,22 +88,24 @@ class AppButton extends StatelessWidget {
     if (text != null) {
       content = type == ButtonType.outlined
           ? AppText.heading(
-        text!,
-        color: color ?? context.theme.primaryColor,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      )
+              text!,
+              color:  textColor ??
+                  (type == ButtonType.text
+                      ? (color ?? context.theme.primaryColor)
+                      : textColor),
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            )
           : AppText.body(
-        text!,
-
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-        color:
-        textColor ??
-            (type == ButtonType.text
-                ? (color ?? context.theme.primaryColor)
-                : Colors.white),
-      );
+              text!,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color:
+                  textColor ??
+                  (type == ButtonType.text
+                      ? (color ?? context.theme.primaryColor)
+                      : textColor),
+            );
     } else {
       content = child!;
     }
@@ -111,16 +116,17 @@ class AppButton extends StatelessWidget {
         return SizedBox(
           height: height,
           width: width,
+
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-                backgroundColor: color ?? Theme.of(context).primaryColor,
-                foregroundColor: textColor ?? Colors.white,
-                padding: buttonPadding,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(borderRadiusValue),
-                ),
-                minimumSize: Size(isHome! ? widths / 5 : widths, height)
+              backgroundColor: color ?? Theme.of(context).primaryColor,
+              foregroundColor: textColor ?? Colors.white,
+              padding: buttonPadding,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadiusValue),
+              ),
+              minimumSize: Size(isHome! ? widths / 5 : widths, height),
             ),
             child: content,
           ),
@@ -134,6 +140,7 @@ class AppButton extends StatelessWidget {
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
               foregroundColor: color ?? Theme.of(context).primaryColor,
+               backgroundColor:background ,
               padding: buttonPadding,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadiusValue),
@@ -158,7 +165,7 @@ class AppButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               padding:
-              padding ?? EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+                  padding ?? EdgeInsets.symmetric(horizontal: 2, vertical: 4),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),

@@ -40,16 +40,22 @@ class AppInputField extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: TextFormField(
         maxLines: maxlines,
-        validator: validate,
+        validator: (val) {
+          if (val!.isEmpty) {
+            return ("Enter the $labeltext");
+          }
+          return null;
+
+        },
         obscureText: obscureTexts!,
         controller: controller,
         onChanged: onChanged,
         keyboardType: keyboardType,
         maxLength: maxLength,
         inputFormatters: inputFormatters,
+
         style: const TextStyle(fontSize: 16, color: Color(0xFF212B36)),
         decoration: InputDecoration(
-
           labelText: labeltext,
           labelStyle: TextStyle(
             color: Colors.grey.shade600,

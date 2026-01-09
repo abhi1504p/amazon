@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/app_size.dart';
 import 'package:frontend/constants/global_variables.dart';
 import 'package:frontend/core/widgets/app_input_field.dart';
 
@@ -16,7 +17,7 @@ class HomeAppBar extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 15),
-              height: 42,
+              height: AppSize.h(42),
               child: Material(
                 borderRadius: BorderRadius.circular(7),
                 elevation: 1,

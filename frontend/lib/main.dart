@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/core/widgets/bottom_bar.dart';
+import 'package:frontend/features/admin/screens/admin_screen.dart';
 import 'package:frontend/features/auth/services/auth_services.dart';
 
 import 'package:frontend/provider/user_provider.dart';
@@ -61,7 +62,9 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ?  const PersistentBottomNavBarDemo()
+          ? Provider.of<UserProvider>(context).user.type == 'user'
+                ? const PersistentBottomNavBarDemo()
+                : AdminScreen()
           : const AuthScreen(),
     );
   }

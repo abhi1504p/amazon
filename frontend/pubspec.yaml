@@ -42,6 +42,9 @@ dependencies:
   persistent_bottom_nav_bar_v2: ^6.2.0
   badges:
   buttons_tabbar:
+  carousel_slider:
+  dotted_border:
+  file_picker:
 
 dev_dependencies:
   flutter_test:

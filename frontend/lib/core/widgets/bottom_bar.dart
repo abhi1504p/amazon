@@ -38,7 +38,10 @@ class PersistentBottomNavBarDemo extends StatelessWidget {
         ],
         navBarBuilder: (navBarConfig) => Style1BottomNavBar(
           navBarConfig: navBarConfig,
-          navBarDecoration: NavBarDecoration(color: Colors.black12,borderRadius: BorderRadius.circular(5)),
+          navBarDecoration: NavBarDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(5),
+          ),
         ),
       ),
     );

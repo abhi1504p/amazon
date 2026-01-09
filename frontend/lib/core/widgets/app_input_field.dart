@@ -45,7 +45,6 @@ class AppInputField extends StatelessWidget {
             return ("Enter the $labeltext");
           }
           return null;
-
         },
         obscureText: obscureTexts!,
         controller: controller,
@@ -57,6 +56,7 @@ class AppInputField extends StatelessWidget {
         style: const TextStyle(fontSize: 16, color: Color(0xFF212B36)),
         decoration: InputDecoration(
           labelText: labeltext,
+          alignLabelWithHint: true,
           labelStyle: TextStyle(
             color: Colors.grey.shade600,
             fontSize: 15,
@@ -64,7 +64,7 @@ class AppInputField extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey.shade400),
+            borderSide: BorderSide(color: Colors.grey.shade400, width: 1.5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -82,7 +82,6 @@ class AppInputField extends StatelessWidget {
             horizontal: 18,
             vertical: 18,
           ),
-
           counterText: '',
         ),
       ),

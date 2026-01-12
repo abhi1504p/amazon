@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/app_size.dart';
@@ -24,6 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController quantityController = TextEditingController();
   String category = 'Mobiles';
   List<File> images = [];
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -72,34 +74,53 @@ class _AddProductScreenState extends State<AddProductScreen> {
             child: Column(
               children: [
                 SizedBox(height: 20),
-                GestureDetector(
-                  onTap: selectedImage,
-                  child: DottedBorder(
-                    options: RoundedRectDottedBorderOptions(
-                      radius: Radius.circular(10),
-                      dashPattern: [10, 7],
-                      strokeCap: StrokeCap.round,
-                    ),
-                    child: Container(
-                      height: AppSize.h(150),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.folder_open_outlined, size: 40),
-                          SizedBox(height: 10),
-                          AppText.body(
-                            "Selected Product Image",
-                            color: Colors.grey.shade400,
+                images.isNotEmpty
+                    ? CarouselSlider(
+                        items: images
+                            .map(
+                              (item) => Builder(
+                                builder: (context) {
+                                  return Image.file(item, fit: BoxFit.fill);
+                                },
+                              ),
+                            )
+                            .toList(),
+                        options: CarouselOptions(
+                          height: AppSize.h(200),
+                          viewportFraction: 1,
+                          autoPlay: false,
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: true,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: selectedImage,
+                        child: DottedBorder(
+                          options: RoundedRectDottedBorderOptions(
+                            radius: Radius.circular(10),
+                            dashPattern: [10, 7],
+                            strokeCap: StrokeCap.round,
                           ),
-                        ],
+                          child: Container(
+                            height: AppSize.h(150),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.folder_open_outlined, size: 40),
+                                SizedBox(height: 10),
+                                AppText.body(
+                                  "Selected Product Image",
+                                  color: Colors.grey.shade400,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 SizedBox(height: 20),
                 AppInputField(
                   obscureTexts: false,

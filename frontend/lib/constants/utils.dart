@@ -33,7 +33,7 @@ Future<List<File>> pickImages() async {
   try {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
-      type: FileType.image,
+      type: FileType.custom,
     );
     if (result != null && result.files.isNotEmpty) {
       for (int i = 0; i < result.files.length; i++) {

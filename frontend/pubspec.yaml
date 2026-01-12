@@ -45,6 +45,7 @@ dependencies:
   carousel_slider:
   dotted_border:
   file_picker:
+  cloudinary_public:
 
 dev_dependencies:
   flutter_test:

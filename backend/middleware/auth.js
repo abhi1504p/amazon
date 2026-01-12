@@ -13,6 +13,7 @@ const auth = async (req, res, next) => {
             return res.status(401).json({msg: 'Token verification failed token unauthorized'});
         }
         req.user = verified.id;
+        console.log(req.user)
         req.token = token
         next();
     } catch (e) {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Product {
   final String name;
   final String description;
@@ -31,8 +33,7 @@ class Product {
           quantity == other.quantity &&
           images == other.images &&
           category == other.category &&
-          id == other.id &&
-          userId == other.userId);
+          id == other.id);
 
   @override
   int get hashCode =>
@@ -42,8 +43,7 @@ class Product {
       quantity.hashCode ^
       images.hashCode ^
       category.hashCode ^
-      id.hashCode ^
-      userId.hashCode;
+      id.hashCode;
 
   @override
   String toString() {
@@ -55,7 +55,6 @@ class Product {
         ' images: $images,' +
         ' category: $category,' +
         ' id: $id,' +
-        ' userId: $userId,' +
         '}';
   }
 
@@ -67,7 +66,6 @@ class Product {
     List<String>? images,
     String? category,
     String? id,
-    String? userId,
   }) {
     return Product(
       name: name ?? this.name,
@@ -77,7 +75,6 @@ class Product {
       images: images ?? this.images,
       category: category ?? this.category,
       id: id ?? this.id,
-      userId: userId ?? this.userId,
     );
   }
 
@@ -90,7 +87,6 @@ class Product {
       'images': this.images,
       'category': this.category,
       'id': this.id,
-      'userId': this.userId,
     };
   }
 
@@ -98,14 +94,15 @@ class Product {
     return Product(
       name: map['name'] as String,
       description: map['description'] as String,
-      price: map['price'] as double,
-      quantity: map['quantity'] as double,
-      images: map['images'] as List<String>,
+      price: (map['price'] as num).toDouble(),
+      quantity: (map['quantity'] as num).toDouble(),
+      images: List<String>.from(map['images']),
       category: map['category'] as String,
       id: map['_id'] as String,
-      userId: map['userId'] as String,
     );
   }
+  String toJson() => json.encode(toMap());
 
+  factory Product.fromJson(String source) => Product.fromMap(json.decode(source));
   //</editor-fold>
 }

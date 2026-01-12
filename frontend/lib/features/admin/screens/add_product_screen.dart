@@ -9,6 +9,7 @@ import 'package:frontend/constants/utils.dart';
 import 'package:frontend/core/widgets/app_button.dart';
 import 'package:frontend/core/widgets/app_input_field.dart';
 import 'package:frontend/core/widgets/app_text.dart';
+import 'package:frontend/features/admin/services/admin_services.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product';
@@ -23,8 +24,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  final AdminServices adminServices = AdminServices();
   String category = 'Mobiles';
   List<File> images = [];
+
+  final _addProductFormKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -43,6 +47,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Books',
     'Fashion',
   ];
+
+  void sellProduct()  {
+    if (_addProductFormKey.currentState!.validate()&& images.isNotEmpty)  {
+      adminServices.sellProduct(
+        context: context,
+        name: productNameController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
+        images: images,
+        category: category,
+      );
+    }
+  }
 
   void selectedImage() async {
     var res = await pickImages();
@@ -69,6 +87,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -192,7 +211,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   type: ButtonType.filled,
                   text: "Sell",
                   color: GlobalVariables.secondaryColor,
-                  onPressed: () {},
+                  onPressed: sellProduct,
                 ),
               ],
             ),

@@ -11,10 +11,14 @@ const PORT = process.env.PORT
 
 // Import from other files
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
+const productRouter = require("./routes/product");
 
 // Middleware
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter)
+app.use(productRouter);
 
 
 // Connections

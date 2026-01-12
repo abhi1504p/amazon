@@ -13,7 +13,7 @@ class CarousalImage extends StatelessWidget {
       options: CarouselOptions(
         height: AppSize.h(200),
         viewportFraction: 1,
-        autoPlay: true,
+        autoPlay: false,
         aspectRatio: 2.0,
         enlargeCenterPage: true,
       ),

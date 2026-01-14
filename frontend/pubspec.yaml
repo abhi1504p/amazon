@@ -46,6 +46,7 @@ dependencies:
   dotted_border:
   file_picker:
   cloudinary_public:
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:

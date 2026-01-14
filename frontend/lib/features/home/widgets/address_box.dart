@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants/global_variables.dart';
+
 import 'package:frontend/core/widgets/app_text.dart';
 import 'package:frontend/provider/user_provider.dart';
 import 'package:provider/provider.dart';

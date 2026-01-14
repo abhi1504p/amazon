@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'rating.dart';
+
 class Product {
   final String name;
   final String description;
@@ -9,7 +11,7 @@ class Product {
   final String category;
   final String? id;
   final String? userId;
-
+  final List<Rating>? rating;
   //<editor-fold desc="Data Methods">
   const Product({
     required this.name,
@@ -18,6 +20,7 @@ class Product {
     required this.quantity,
     required this.images,
     required this.category,
+     this.rating,
     this.id,
     this.userId,
   });
@@ -66,6 +69,7 @@ class Product {
     List<String>? images,
     String? category,
     String? id,
+    List<Rating>? rating,
   }) {
     return Product(
       name: name ?? this.name,
@@ -75,6 +79,7 @@ class Product {
       images: images ?? this.images,
       category: category ?? this.category,
       id: id ?? this.id,
+      rating: rating ?? this.rating,
     );
   }
 
@@ -87,6 +92,7 @@ class Product {
       'images': this.images,
       'category': this.category,
       'id': this.id,
+      'rating': this.rating,
     };
   }
 
@@ -99,10 +105,14 @@ class Product {
       images: List<String>.from(map['images']),
       category: map['category'] as String,
       id: map['_id'] as String,
+      rating: map['ratings'] != null
+          ? List<Rating>.from(map['ratings']?.map((x) => Rating.fromMap(x)))
+          : null,
     );
   }
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) => Product.fromMap(json.decode(source));
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source));
   //</editor-fold>
 }

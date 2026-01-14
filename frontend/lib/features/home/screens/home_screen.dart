@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/app_size.dart';
+import 'package:frontend/constants/global_variables.dart';
 import 'package:frontend/features/home/widgets/address_box.dart';
-import 'package:frontend/features/home/widgets/carousal_image.dart';
+import 'package:frontend/core/widgets/carousal_image.dart';
 import 'package:frontend/features/home/widgets/deal_of_the_day.dart';
 import 'package:frontend/features/home/widgets/home_app_bar.dart';
 import 'package:frontend/features/home/widgets/top_categories.dart';
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 3),
             TopCategories(),
             SizedBox(height: 8),
-            CarousalImage(),
+            CarousalImage(images: GlobalVariables.carouselImages,height: AppSize.h(200),),
             SizedBox(height: 2),
             DealOfTheDay(),
           ],

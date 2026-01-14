@@ -3,6 +3,7 @@ import 'package:frontend/constants/app_size.dart';
 import 'package:frontend/constants/global_variables.dart';
 import 'package:frontend/core/widgets/loader.dart';
 import 'package:frontend/features/home/widgets/address_box.dart';
+import 'package:frontend/features/product_details/screen/product_details_screen.dart';
 import 'package:frontend/features/search/services/search_services.dart';
 import 'package:frontend/features/search/widget/search_product.dart';
 import 'package:frontend/models/product.dart';
@@ -34,6 +35,10 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {});
   }
 
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},
@@ -100,12 +106,20 @@ class _SearchScreenState extends State<SearchScreen> {
           : Column(
               children: [
                 const AddressBox(),
-                SizedBox(height: 10,),
+                SizedBox(height: 10),
                 Expanded(
                   child: ListView.builder(
                     itemCount: products!.length,
-                    itemBuilder: (context, index) =>
-                        SearchProduct(product: products![index]),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          ProductDetailsScreen.routeName,
+                          arguments: products![index],
+                        );
+                      },
+                      child: SearchProduct(product: products![index]),
+                    ),
                   ),
                 ),
               ],

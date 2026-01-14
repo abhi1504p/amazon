@@ -3,6 +3,8 @@ import 'package:frontend/constants/app_size.dart';
 import 'package:frontend/core/widgets/app_text.dart';
 import 'package:frontend/core/widgets/star.dart';
 import 'package:frontend/models/product.dart';
+import 'package:frontend/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class SearchProduct extends StatelessWidget {
   final Product product;
@@ -10,6 +12,18 @@ class SearchProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double totalRating = 0;
+    double avgRating = 0;
+    for (int i = 0; i < product.rating!.length; i++) {
+      totalRating += product.rating![i].rating;
+      if (product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        var myRating = product.rating![i].rating;
+      }
+    }
+    if (totalRating != 0) {
+      avgRating = totalRating / product.rating!.length;
+    }
     return Column(
       children: [
         Container(
@@ -33,7 +47,7 @@ class SearchProduct extends StatelessWidget {
                     Container(
                       width: AppSize.w(235),
                       padding: EdgeInsets.only(left: 10, top: 5),
-                      child: Star(rating: 3),
+                      child: Star(rating: avgRating),
                     ),
                     Container(
                       width: AppSize.w(235),

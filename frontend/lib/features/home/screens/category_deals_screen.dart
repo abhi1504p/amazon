@@ -4,6 +4,7 @@ import 'package:frontend/constants/global_variables.dart';
 import 'package:frontend/core/widgets/app_text.dart';
 import 'package:frontend/core/widgets/loader.dart';
 import 'package:frontend/features/home/service/home_service.dart';
+import 'package:frontend/features/product_details/screen/product_details_screen.dart';
 import 'package:frontend/models/product.dart';
 
 class CategoryDealsScreen extends StatefulWidget {
@@ -70,37 +71,46 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     ),
                     itemBuilder: (context, index) {
                       final product = productList[index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: AppSize.h(130),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black12,
-                                  width: 1,
+                      return GestureDetector(
+                        onTap: () => {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailsScreen.routeName,
+                            arguments: product,
+                          ),
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: AppSize.h(130),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsGeometry.all(10),
+                                  child: Image.network(product.images[0]),
                                 ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsGeometry.all(10),
-                                child: Image.network(product.images[0]),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: EdgeInsetsGeometry.only(
+                                left: 0,
+                                top: 5,
+                                right: 15,
+                              ),
+                              child: AppText.body(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            padding: EdgeInsetsGeometry.only(
-                              left: 0,
-                              top: 5,
-                              right: 15,
-                            ),
-                            child: AppText.body(
-                              product.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),

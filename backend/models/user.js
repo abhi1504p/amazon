@@ -1,33 +1,35 @@
 const mongoose = require("mongoose");
+const { productSchema } = require("./product");
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /.+\@.+\..+/
-    },
-    password: {
-        type: String,
-        required: true,
-        minLength: 6
-    },
-    address: {
-        type: String,
-        default: ''
-    },
-    type: {
-        type: String,
-        default: "user"
-    }
-
-
-})
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /.+\@.+\..+/,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6,
+  },
+  address: {
+    type: String,
+    default: "",
+  },
+  type: {
+    type: String,
+    default: "user",
+  },
+  cart: [
+    { product: productSchema, quantity: { type: Number, required: true } },
+  ],
+});
 
 const User = mongoose.model("User", userSchema);
 

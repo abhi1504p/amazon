@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/account/screens/account_screen.dart';
+import 'package:frontend/features/cart/screen/cart_screen.dart';
 import 'package:frontend/features/home/screens/home_screen.dart';
+import 'package:frontend/provider/user_provider.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
 
 class PersistentBottomNavBarDemo extends StatelessWidget {
   const PersistentBottomNavBarDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userCartLength=context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: PersistentTabView(
         tabs: [
@@ -21,11 +25,11 @@ class PersistentBottomNavBarDemo extends StatelessWidget {
             item: ItemConfig(icon: Icon(Icons.person), title: "Account"),
           ),
           PersistentTabConfig(
-            screen: Text("cart"),
+            screen: CartScreen(),
             item: ItemConfig(
               icon: badges.Badge(
                 position: badges.BadgePosition.custom(top: -10, end: -14),
-                badgeContent: Text("3"),
+                badgeContent: Text(userCartLength.toString()),
                 badgeStyle: const badges.BadgeStyle(
                   elevation: 0,
                   shape: badges.BadgeShape.circle,

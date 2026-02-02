@@ -3,6 +3,7 @@ import 'package:frontend/constants/app_size.dart';
 import 'package:frontend/constants/global_variables.dart';
 import 'package:frontend/core/widgets/loader.dart';
 import 'package:frontend/features/home/widgets/address_box.dart';
+import 'package:frontend/features/home/widgets/home_app_bar.dart';
 import 'package:frontend/features/product_details/screen/product_details_screen.dart';
 import 'package:frontend/features/search/services/search_services.dart';
 import 'package:frontend/features/search/widget/search_product.dart';
@@ -44,62 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: GlobalVariables.appBarGradient),
-          ),
-          title: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(left: 15),
-                  height: AppSize.h(42),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(7),
-                    elevation: 1,
-                    child: TextFormField(
-                      onFieldSubmitted: navigateToSearchScreen,
-                      decoration: InputDecoration(
-                        prefixIcon: InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 6),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                              size: 23,
-                            ),
-                          ),
-                        ),
-                        filled: true,
-                        hintText: "Search Amazon.in",
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                        ),
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.only(bottom: 10),
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
-                          borderSide: BorderSide.none,
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
-                          borderSide: BorderSide(
-                            color: Colors.black38,
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 10),
-              Icon(Icons.mic),
-            ],
-          ),
-        ),
+        child: HomeAppBar(),
       ),
       body: products == null
           ? Loader()

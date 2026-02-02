@@ -26,6 +26,7 @@ class AuthService {
         address: "",
         type: "user",
         token: '',
+        cart: []
       );
       var url = Uri.parse('$baseUrl/api/signup');
       http.Response res = await http.post(

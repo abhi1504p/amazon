@@ -66,7 +66,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: AppSize.w(10)),
           Icon(Icons.mic),
         ],
       ),

@@ -13,10 +13,6 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AdminAppbar(),
-      ),
       body: AdminBottomBar(),
     );
   }

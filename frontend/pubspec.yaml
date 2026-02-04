@@ -48,6 +48,8 @@ dependencies:
   cloudinary_public:
   flutter_rating_bar:
   pay:
+  intl:
+  fl_chart: ^1.1.1
 
 dev_dependencies:
   flutter_test:

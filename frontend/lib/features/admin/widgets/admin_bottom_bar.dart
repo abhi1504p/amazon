@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/admin/screens/analytic_screen.dart';
+import 'package:frontend/features/admin/screens/order_screen.dart';
 import 'package:frontend/features/admin/screens/post_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
@@ -14,14 +16,14 @@ class AdminBottomBar extends StatelessWidget {
             item: ItemConfig(icon: Icon(Icons.home), title: "Home"),
           ),
           PersistentTabConfig(
-            screen: Text("inbox"),
+            screen: OrdersScreen(),
             item: ItemConfig(
               icon: Icon(Icons.all_inbox_outlined),
               title: "Inbox",
             ),
           ),
           PersistentTabConfig(
-            screen: Text("cart"),
+            screen: AnalyticsScreen(),
             item: ItemConfig(
               icon: const Icon(Icons.analytics_outlined),
               title: "Analytics",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/app_size.dart';
 
 class SingleProductList extends StatelessWidget {
   final String image;
@@ -12,7 +13,7 @@ class SingleProductList extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
       ),
       child: Container(
-        width: 180,
+        width: AppSize.w(180),
         padding: EdgeInsets.all(10),
         child: Image.network(image, fit: BoxFit.fill),
       ),

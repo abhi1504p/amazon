@@ -6,6 +6,7 @@ import 'package:frontend/core/widgets/loader.dart';
 import 'package:frontend/features/account/widgets/single_product_list.dart';
 import 'package:frontend/features/admin/screens/add_product_screen.dart';
 import 'package:frontend/features/admin/services/admin_services.dart';
+import 'package:frontend/features/admin/widgets/admin_appbar.dart';
 import 'package:frontend/models/product.dart';
 
 class PostScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _PostScreenState extends State<PostScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(fetchProducts); // ✅ SAFE
+    Future.microtask(fetchProducts);
   }
 
   void fetchProducts() async {
@@ -55,6 +56,10 @@ class _PostScreenState extends State<PostScreen> {
     return products == null
         ? Loader()
         : Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight),
+              child: AdminAppbar(),
+            ),
             body: GridView.builder(
               itemCount: products!.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -62,29 +67,34 @@ class _PostScreenState extends State<PostScreen> {
               ),
               itemBuilder: (context, index) {
                 final productData = products![index];
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: AppSize.h(140),
-                      child: SingleProductList(image: productData.images[0]),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: AppText.body(
-                            productData.name,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: AppSize.h(140),
+                        child: SingleProductList(image: productData.images[0]),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: AppText.body(
+                                productData.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => deleteProduct(productData, index),
+                              icon: Icon(Icons.delete_outline),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          onPressed: () => deleteProduct(productData, index),
-                          icon: Icon(Icons.delete_outline),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

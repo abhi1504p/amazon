@@ -47,6 +47,7 @@ dependencies:
   file_picker:
   cloudinary_public:
   flutter_rating_bar:
+  pay:
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,8 @@ flutter:
     - .env
 
     - assets/images/
+    - assets/applepay.json
+    - assets/googlepay.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
